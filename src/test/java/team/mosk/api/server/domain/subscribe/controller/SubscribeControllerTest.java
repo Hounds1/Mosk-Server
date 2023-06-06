@@ -33,7 +33,7 @@ public class SubscribeControllerTest extends ControllerIntegrationSupport {
     @WithAuthUser
     void findAllSubHistoriesByLoginAccount() throws Exception {
         List<SubscribeHistoryResponse> list = new ArrayList<>();
-        list.add(SubscribeHistoryResponse.of(GivenSubscribe.toEntityWithStoreAndCount(1L, 1000L)));
+        list.add(SubscribeHistoryResponse.of(GivenSubscribe.toEntityWithStoreAndCount(1L, 1000)));
 
         when(subscribeReadService.findAllByStoreId(any())).thenReturn(list);
 
@@ -44,7 +44,14 @@ public class SubscribeControllerTest extends ControllerIntegrationSupport {
                 .andExpect(jsonPath("$.data[0].storeId").value(1L))
                 .andExpect(jsonPath("$.data[0].startDate").value(LocalDate.now().toString()))
                 .andExpect(jsonPath("$.data[0].endDate").value(LocalDate.now().plusMonths(1L).toString()))
-                .andExpect(jsonPath("$.data[0].price").value(1000L))
+                .andExpect(jsonPath("$.data[0].amount").value(1000))
                 .andDo(print());
+    }
+
+    @Test
+    @DisplayName("결제와 함께 구독 정보를 생성한다.")
+    @WithAuthUser
+    void createNewSubscribeWithPayment() throws Exception {
+        // TODO: 2023-06-06 결제 후 구독 생성 테스트 작성 
     }
 }

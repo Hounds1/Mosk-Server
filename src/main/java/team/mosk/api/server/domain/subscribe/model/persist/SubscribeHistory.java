@@ -26,14 +26,27 @@ public class SubscribeHistory extends BaseEntity {
 
     private LocalDate endDate;
 
-    private Long price;
+    private int amount;
 
-    public static SubscribeHistory transfer(final Subscribe subscribe, final Long price) {
+    private boolean paymentStatus;
+
+    public static SubscribeHistory transfer(final Subscribe subscribe, final int amount) {
         return SubscribeHistory.builder()
                 .store(subscribe.getStore())
                 .startDate(subscribe.getStartDate())
                 .endDate(subscribe.getEndDate())
-                .price(price)
+                .amount(amount)
+                .paymentStatus(true)
+                .build();
+    }
+
+    public static SubscribeHistory FailedPaymentHistory(final Store store, final int amount) {
+        return SubscribeHistory.builder()
+                .store(store)
+                .startDate(LocalDate.now())
+                .endDate(null)
+                .amount(amount)
+                .paymentStatus(true)
                 .build();
     }
 }

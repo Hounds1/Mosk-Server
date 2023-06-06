@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team.mosk.api.server.domain.order.model.order.Order;
+import team.mosk.api.server.domain.subscribe.dto.SubscribePaymentRequest;
 
 import java.util.UUID;
 
@@ -16,10 +17,28 @@ public class TossPaymentRequest {
   private int amount; // 결제할 금액
 
   public static TossPaymentRequest of(Order order, String paymentKey) {
+    String orderId = UUID.randomUUID()
+            .toString()
+            .replaceAll("-", "")
+            .substring(0, 16);
+
     return TossPaymentRequest.builder()
             .paymentKey(paymentKey)
-            .orderId(UUID.randomUUID().toString())
+            .orderId(orderId)
             .amount(order.getTotalPrice())
+            .build();
+  }
+
+  public static TossPaymentRequest of(final SubscribePaymentRequest request) {
+    String orderId = UUID.randomUUID()
+            .toString()
+            .replaceAll("-", "")
+            .substring(0, 16);
+
+    return TossPaymentRequest.builder()
+            .paymentKey(request.getPaymentKey())
+            .orderId(orderId)
+            .amount(request.getAmount().intValue())
             .build();
   }
 

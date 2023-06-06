@@ -18,13 +18,13 @@ public class SubscribeHistoryResponse {
     private Long storeId;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Long price;
+    private int amount;
 
     public static SubscribeHistoryResponse of(final SubscribeHistory subscribeHistory) {
         return new SubscribeHistoryResponse(subscribeHistory.getId(),
                 subscribeHistory.getStore().getId(),
                 subscribeHistory.getStartDate(),
                 subscribeHistory.getEndDate(),
-                subscribeHistory.getPrice());
+                subscribeHistory.getAmount());
     }
 }

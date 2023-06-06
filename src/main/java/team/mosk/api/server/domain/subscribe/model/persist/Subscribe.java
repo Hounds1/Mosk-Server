@@ -34,7 +34,7 @@ public class Subscribe extends BaseEntity {
         this.startDate = LocalDate.now();
     }
 
-    public static Subscribe createEntity(final Store store, final Long period, final Long price) {
+    public static Subscribe createEntity(final Store store, final Long period) {
         LocalDate now = LocalDate.now();
 
         return Subscribe.builder()

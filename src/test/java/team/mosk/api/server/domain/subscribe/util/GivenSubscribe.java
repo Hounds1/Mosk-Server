@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class GivenSubscribe {
 
-    public static SubscribeHistory toEntityWithStoreAndCount(final Long period, final Long price) {
+    public static SubscribeHistory toEntityWithStoreAndCount(final Long period, final int amount) {
         Store dummy = Store.builder()
                 .id(1L)
                 .storeName("TEST")
@@ -21,7 +21,7 @@ public class GivenSubscribe {
                 .store(dummy)
                 .startDate(now)
                 .endDate(now.plusMonths(period))
-                .price(price)
+                .amount(amount)
                 .build();
     }
 }

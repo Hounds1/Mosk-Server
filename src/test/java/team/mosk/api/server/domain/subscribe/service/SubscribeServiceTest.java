@@ -70,9 +70,9 @@ public class SubscribeServiceTest extends IntegrationTestSupport {
     @WithAuthUser
     void newSubscribe() {
         final Long period = 3L;
-        final Long price = 150000L;
+        final int amount = 150000;
 
-        SubscribeResponse response = subscribeService.newSubscribe(store.getId(), period, price);
+        SubscribeResponse response = subscribeService.newSubscribe(store.getId(), period, amount);
 
         LocalDate now = LocalDate.now();
 
@@ -94,7 +94,7 @@ public class SubscribeServiceTest extends IntegrationTestSupport {
             assertThat(findHistory.getStore().getId()).isEqualTo(findSub.getStore().getId());
             assertThat(findHistory.getStartDate()).isEqualTo(findSub.getStartDate());
             assertThat(findHistory.getEndDate()).isEqualTo(findSub.getEndDate());
-            assertThat(findHistory.getPrice()).isEqualTo(price);
+            assertThat(findHistory.getAmount()).isEqualTo(amount);
         }
     }
 }
